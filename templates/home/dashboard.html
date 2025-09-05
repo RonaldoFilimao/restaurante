@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard Restaurante</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<style>
+  /* Cards com animação */
+  .card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.18);
+  }
+  /* Gradiente menu lateral azul ciano */
+  aside {
+    background: linear-gradient(180deg, #06b6d4 0%, #0e7490 100%);
+  }
+  /* Gradiente cabeçalho */
+  header {
+    background: linear-gradient(90deg, #0ea5e9 0%, #0284c7 100%);
+  }
+  /* Hover nos links do menu */
+  .menu-link:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+  }
+</style>
+</head>
+<body class="bg-gray-50 flex h-screen font-sans">
+
+<!-- Menu lateral -->
+<aside class="w-64 text-white flex flex-col transition-transform duration-300 md:translate-x-0 -translate-x-full md:flex">
+    <div class="p-6 text-2xl font-extrabold flex items-center justify-center border-b border-white/20">
+        <i class="fa-solid fa-utensils mr-2"></i> Restaurante
+    </div>
+    <nav class="flex-1 px-4 mt-4 space-y-2">
+        {% if can_view_dashboard %}
+        <a href="#" class="menu-link flex items-center py-3 px-4 rounded-lg transition font-medium">
+            <i class="fa-solid fa-gauge mr-3"></i> Dashboard
+        </a>
+        {% endif %}
+        {% if can_view_pedidos %}
+        <a href="#" class="menu-link flex items-center py-3 px-4 rounded-lg transition font-medium">
+            <i class="fa-solid fa-bag-shopping mr-3"></i> Pedidos
+        </a>
+        {% endif %}
+        {% if can_view_cardapio %}
+        <a href="#" class="menu-link flex items-center py-3 px-4 rounded-lg transition font-medium">
+            <i class="fa-solid fa-list mr-3"></i> Cardápio
+        </a>
+        {% endif %}
+        {% if can_view_caixa %}
+        <a href="#" class="menu-link flex items-center py-3 px-4 rounded-lg transition font-medium">
+            <i class="fa-solid fa-cash-register mr-3"></i> Caixa
+        </a>
+        {% endif %}
+        {% if can_view_relatorios %}
+        <a href="#" class="menu-link flex items-center py-3 px-4 rounded-lg transition font-medium">
+            <i class="fa-solid fa-chart-line mr-3"></i> Relatórios
+        </a>
+        {% endif %}
+        {% if can_view_configuracoes %}
+        <a href="#" class="menu-link flex items-center py-3 px-4 rounded-lg transition font-medium">
+            <i class="fa-solid fa-gear mr-3"></i> Configurações
+        </a>
+        {% endif %}
+    </nav>
+    <div class="p-6 border-t border-white/20">
+        <button class="w-full bg-white text-cyan-600 font-bold py-2 rounded-lg hover:bg-gray-100 transition flex justify-center items-center">
+            <i class="fa-solid fa-right-from-bracket mr-2"></i> Sair
+        </button>
+    </div>
+</aside>
+
+<!-- Conteúdo principal -->
+<main class="flex-1 flex flex-col overflow-auto">
+
+    <!-- Cabeçalho -->
+    <header class="shadow p-4 flex justify-between items-center sticky top-0 z-10 text-white">
+        <h1 class="text-2xl font-bold">Bem-vindo ao Sistema de Gestão do Restaurante</h1>
+    </header>
+
+    <!-- Cards -->
+    <section class="p-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {% if can_view_pedidos %}
+        <div class="card bg-gradient-to-r from-cyan-500 to-blue-600 text-white p-6 rounded-2xl shadow">
+            <h2 class="text-xl font-semibold mb-2 flex items-center">
+                <i class="fa-solid fa-bag-shopping mr-2"></i> Pedidos
+            </h2>
+            <p>Gerencie pedidos, visualize status e detalhes.</p>
+        </div>
+        {% endif %}
+
+        {% if can_view_cardapio %}
+        <div class="card bg-gradient-to-r from-cyan-400 to-blue-500 text-white p-6 rounded-2xl shadow">
+            <h2 class="text-xl font-semibold mb-2 flex items-center">
+                <i class="fa-solid fa-list mr-2"></i> Cardápio
+            </h2>
+            <p>Visualize e edite produtos e categorias do cardápio.</p>
+        </div>
+        {% endif %}
+
+        {% if can_view_caixa %}
+        <div class="card bg-gradient-to-r from-cyan-500 to-blue-700 text-white p-6 rounded-2xl shadow">
+            <h2 class="text-xl font-semibold mb-2 flex items-center">
+                <i class="fa-solid fa-cash-register mr-2"></i> Caixa
+            </h2>
+            <p>Controle vendas, pagamentos e fechamento diário.</p>
+        </div>
+        {% endif %}
+
+        {% if can_view_relatorios %}
+        <div class="card bg-gradient-to-r from-cyan-600 to-blue-800 text-white p-6 rounded-2xl shadow">
+            <h2 class="text-xl font-semibold mb-2 flex items-center">
+                <i class="fa-solid fa-chart-line mr-2"></i> Relatórios
+            </h2>
+            <p>Analise vendas, estoque e desempenho do restaurante.</p>
+        </div>
+        {% endif %}
+
+        {% if can_view_configuracoes %}
+        <div class="card bg-gray-800 text-white p-6 rounded-2xl shadow">
+            <h2 class="text-xl font-semibold mb-2 flex items-center">
+                <i class="fa-solid fa-gear mr-2"></i> Configurações
+            </h2>
+            <p>Gerencie usuários, permissões e parâmetros do sistema.</p>
+        </div>
+        {% endif %}
+    </section>
+</main>
+</body>
+</html>

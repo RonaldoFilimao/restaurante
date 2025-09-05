@@ -13,7 +13,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Segurança
 SECRET_KEY = 'django-insecure-2dx^mk&uh#4b)^^#azebd6+gr%kfvjut!nl*rtukj9!mnzo&2h'
 DEBUG = True
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['restaurante-production-fd81.up.railway.app']
 
 # Aplicativos
 INSTALLED_APPS = [
